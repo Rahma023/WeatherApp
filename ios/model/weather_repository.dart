@@ -4,7 +4,8 @@ import 'model/weather.dart';
 import 'weather.dart';
 
 abstract class WeatherRepository{
-  [NetworkException]
+  // ignore: non_constant_identifier_names, prefer_typing_uninitialized_variables
+//  [NetworkException;]
   Future<Weather> fetchWeather(String cityName);
 }
 
@@ -29,6 +30,9 @@ class FakeWeatherRepository implements WeatherRepository{
       },
     );
   }
+
+  @override
+  var NetworkException;
 }
 
 class NetworkException implements Exception{}
