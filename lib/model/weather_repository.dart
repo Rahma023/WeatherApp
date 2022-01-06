@@ -1,6 +1,5 @@
 import 'dart:math';
-
-import 'model/weather.dart';
+// import 'model/weather.dart';
 import 'weather.dart';
 
 abstract class WeatherRepository{

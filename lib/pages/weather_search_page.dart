@@ -20,7 +20,6 @@ class _WeatherSearchPageState extends State<WeatherSearchPage>{
         alignment: Alignment.center,
         child: bloclistener(
           listener: (context, state) {
-            // TODO: implement listener
           },
           child: blocconsumer<WeatherCubit, WeatherState>(
             Listener: (context, state){
