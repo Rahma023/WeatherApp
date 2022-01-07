@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/cubit/weather_cubit.dart';
+import 'package:flutter_application_1/model/weather.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 //import 'package:flutter_application_1/ios/model/weather.dart';
 
 
@@ -18,11 +20,13 @@ class _WeatherSearchPageState extends State<WeatherSearchPage>{
       body: Container(
         padding: EdgeInsets.symmetric(vertical: 16),
         alignment: Alignment.center,
-        child: bloclistener(
+        child: BlocListener(
           listener: (context, state) {
           },
-          child: blocconsumer<WeatherCubit, WeatherState>(
-            Listener: (context, state){
+
+
+          child: BlocConsumer<WeatherCubit, WeatherState>(
+            listener: (context, state){
               if(state is WeatherError){
                 Scaffold.of(context).showSnackBar(
                   SnackBar(
@@ -32,13 +36,17 @@ class _WeatherSearchPageState extends State<WeatherSearchPage>{
                 );
               }
             },
+
+
           builder: (context, state){
             if(state is WeatherInitial){
               return buildInitialInput();
             }
+
             else if(state is WeatherLoading){
-              return WeatherLoading();
+              return widgetbuildLoading();
             }
+
             else if(state is WeatherLoaded){
               return buildColumnWithData(state.weather);
             }
@@ -60,13 +68,13 @@ class _WeatherSearchPageState extends State<WeatherSearchPage>{
     );
   }
 
-  WidgetbuildLoading(){
+  widgetbuildLoading(){
     return Center(
       child: CircularProgressIndicator(),
     );
   }
 
-  Column buildColumnWithData(Weather, weather){
+  Column buildColumnWithData(Weather weather){
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: <Widget>[
@@ -108,11 +116,13 @@ class cityInputField extends StatelessWidget{
       
     );
 
-    // ignore: dead_code
-    void submitCityName(BuildContext context, String cityName){
-      final WeatherInitial=context.Bloc<WeatherCubit>();
-      WeatherCubit.getWeather(cityName);
+    
+  }
+  void submitCityName(BuildContext context, String cityName){
+      final weatherInitial=context.read<WeatherCubit>();
+      weatherInitial.getWeather(cityName);
+
+      
 
     }
-  }
 }

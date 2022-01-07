@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/cubit/weather_cubit.dart';
 import 'package:flutter_application_1/model/weather_repository.dart';
 import 'package:flutter_application_1/pages/weather_search_page.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 void main() => runApp(MyApp());
 
